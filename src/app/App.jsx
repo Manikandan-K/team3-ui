@@ -7,6 +7,7 @@ import createHistory from 'history/createBrowserHistory'
 import Header from './Header'
 import Home from './Home'
 import MovieDetail from '../movie-detail/MovieDetail';
+import Footer from "./Footer";
 
 const browserHistory = createHistory()
 
@@ -22,16 +23,17 @@ const Routes = () => (
 );
 
 const Main = () => (
-  <div>
-    <Header />
-    <Routes />
-  </div>  
+    <div>
+        <Header/>
+        <Routes/>
+        <Footer/>
+    </div>
 );
 
 const App = () => (
-  <Provider store={store} >
-    <Main />
-  </Provider>
+    <Provider store={store}>
+        <Main/>
+    </Provider>
 );
 
 export default App;
