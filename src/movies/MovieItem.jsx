@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const MovieItem = ({ name, slug }) => {
+const MovieItem = ({ name, slug, id }) => {
   const imageUrl = `https://img.spicinemas.in/resources/images/movies/${slug}/150x207.jpg`;
   return (
     <div>
       <img alt={name} src={imageUrl} />
-      <h5>{name}</h5>
+      <h5>
+        <a href={`http://localhost:3000/movies/${id}`}>{name}</a>
+      </h5>
     </div>
   )
 }
