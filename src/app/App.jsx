@@ -14,25 +14,25 @@ const browserHistory = createHistory()
 const store = configureStore(browserHistory);
 
 const Routes = () => (
-  <ConnectedRouter history={browserHistory}>
-  <Switch>
-    <Route component={Home} exact path="/" />
-    <Route component={MovieDetail} path="/movies/id" />
-  </Switch>
-  </ConnectedRouter>
+    <ConnectedRouter history={browserHistory}>
+        <Switch>
+            <Route component={Home} exact path="/" />
+            <Route component={MovieDetail} path="/movies/id" />
+        </Switch>
+    </ConnectedRouter>
 );
 
 const Main = () => (
-    <div>
-        <Header/>
-        <Routes/>
-        <Footer/>
+    <div className="container">
+        <Header />
+        <Routes />
+        <Footer />
     </div>
 );
 
 const App = () => (
     <Provider store={store}>
-        <Main/>
+        <Main />
     </Provider>
 );
 

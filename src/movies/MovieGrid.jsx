@@ -11,7 +11,7 @@ class MovieGrid extends Component {
   }
 
   render() {
-    if(this.props.movies.fetching) {
+    if (this.props.movies.fetching) {
       return this.showProgress()
     }
 
@@ -20,14 +20,12 @@ class MovieGrid extends Component {
 
   showMovies() {
     return (
-      <div className="container-fluid">
-        <div className="row">
-          {this.props.movies.items.map(({ name, slug }) => (
-            <div className="col-md-2">
+      <div className="row">
+        {this.props.movies.items.map(({ name, slug }) => (
+          <div className="col-md-2">
             <MovieItem key={name} name={name} slug={slug} />
-            </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     );
   }
@@ -60,7 +58,7 @@ MovieGrid.propTypes = {
 export default connect(
   (state) => ({
     movies: state.movies
-  }), 
+  }),
   (dispatch) => ({
     fetchMovies: () => dispatch(fetchMovies())
   }))(MovieGrid);
