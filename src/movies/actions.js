@@ -1,7 +1,7 @@
 import axios from 'axios';
 import changeCase from 'change-case';
 import slug from 'slug';
-import {baseUrl} from "./helper";
+import {baseUrl} from "./../helper";
 
 export const FETCH_MOVIES_PROGRESS = 'FETCH_MOVIES_PROGRESS';
 export const FETCH_MOVIES_SUCCESS = 'FETCH_MOVIES_SUCCESS';

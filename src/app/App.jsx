@@ -17,7 +17,7 @@ const Routes = () => (
     <ConnectedRouter history={browserHistory}>
         <Switch>
             <Route component={Home} exact path="/" />
-            <Route component={MovieDetail} path="/movies/id" />
+            <Route component={MovieDetail} path="/movies/:id" />
         </Switch>
     </ConnectedRouter>
 );
