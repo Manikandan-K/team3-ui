@@ -6,7 +6,7 @@ const MovieItem = ({ name, slug, id }) => {
   const imageUrl = `https://img.spicinemas.in/resources/images/movies/${slug}/150x207.jpg`;
   return (
     <div>
-      <Link to={`movie/${id}`}>
+      <Link to={`movies/${id}`}>
         <img alt={name} src={imageUrl} />
         <h5>
           {name}
