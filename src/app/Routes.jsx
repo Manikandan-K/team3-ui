@@ -15,7 +15,7 @@ class Routes extends React.Component {
           <Tabs />
           <Switch>
             <Route exact component={MovieGrid} path="/movies" />
-            <Route component={MovieDetail} path="/movie/:id" />
+            <Route component={MovieDetail} path="/movies/:id" />
             <Route exact path="/" render={() => <Redirect to="/movies" />}/>
           </Switch>
         </React.Fragment>
