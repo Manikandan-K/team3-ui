@@ -59,7 +59,7 @@ class MovieDetail extends React.Component {
 
 
         return (
-            <div>
+            <div className="movie-detail-wrapper">
                 <div className="d-flex align-items-center">
                     <h1 className="text-uppercase">{name}</h1>
                     <span className="movie-certificate">{certification}</span>
