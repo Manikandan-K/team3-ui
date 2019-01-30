@@ -44,3 +44,11 @@ footer a:nth-child(2) {
     margin-left: 2%;
 }
 
+.Right-menu{
+    float: right;
+    margin: 5px 10px;
+}
+
+.container-fluid{
+    clear: both;
+}
