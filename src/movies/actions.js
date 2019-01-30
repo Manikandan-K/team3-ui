@@ -20,11 +20,11 @@ const movieDataFetchFailure = {
   type: FETCH_MOVIES_FAILURE,
 };
 
-const fetchMovies = () => {
+const fetchMovies = (type,locationId) => {
   return async (dispatch) => {
     dispatch(fetchMoviesInProgress);
     try {
-      const movies = await axios.get(`${baseUrl()}/movies/now-showing`);
+      const movies = await axios.get(`${baseUrl()}/movies?type=${type}&location=${locationId}`);
       // const movies = {data: [{
       //   id: 'asfasdfas',
       //   name: 'Kabali',

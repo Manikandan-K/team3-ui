@@ -3,14 +3,9 @@ import PropTypes from 'prop-types';
 import './DropDown.css';
 
 class DropDown extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-        let options = this.props.listItems.map((item) => {
-            return (<option value={item.value} selected={item === this.props.selectedItem}>
+        let options = this.props.listItems.map((item,index) => {
+            return (<option value={item.value} selected={item === this.props.selectedItem} key={index}>
                 {item.key}
             </option>);
         });
