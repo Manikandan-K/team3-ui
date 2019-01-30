@@ -32,14 +32,14 @@ class Tabs extends React.Component {
         <ul className="nav nav-tabs" style={{ flex: 1 }}>
           <Tab
             onToggle={this.toggleNowShowing}
-            url="/now-showing"
+            url="/movies"
             isActive={isNowShowing}
           >
             Now Showing
           </Tab>
           <Tab
             onToggle={this.toggleNowShowing}
-            url="/upcoming"
+            url="/movies"
             isActive={!isNowShowing}
           >
             Upcoming
@@ -47,7 +47,7 @@ class Tabs extends React.Component {
         </ul>
 
         <div style={{ flexBasis: "150px" }}>
-          <Location onUpdate={this.onLocationUpdate} />
+          <Location />
         </div>
       </div>
     );
