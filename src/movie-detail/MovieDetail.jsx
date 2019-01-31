@@ -1,5 +1,6 @@
 import React from "react";
 import "./MovieDetail.css";
+import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import fetchMovie from "./actions";
 import PropTypes from "prop-types";
@@ -35,9 +36,23 @@ FootingImages.propTypes = {
 };
 
 class MovieDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirect: false
+    };
+  }
   componentWillMount() {
     const { match } = this.props;
     this.props.fetchMovie(match.params.id);
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.locationId !== prevProps.locationId) {
+      this.setState({redirect : true});
+    }
+    if (this.props.listingType !== prevProps.listingType) {
+      this.setState({redirect : true});
+    }
   }
 
   showProgress() {
@@ -46,6 +61,10 @@ class MovieDetail extends React.Component {
 
   showError() {
     return <div>Error...</div>;
+  }
+
+  redirectToGrid() {
+    return <Redirect to="/movies" />;
   }
 
   showMovie() {
@@ -103,6 +122,7 @@ class MovieDetail extends React.Component {
   }
 
   render() {
+    if (this.state.redirect) return this.redirectToGrid();
     if (this.props.fetching || !this.props.movie) return this.showProgress();
     if (!this.props.fetching) return this.showMovie();
   }
@@ -111,7 +131,9 @@ class MovieDetail extends React.Component {
 MovieDetail.propTypes = {
   movie: PropTypes.object,
   fetching: PropTypes.bool.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  locationId: PropTypes.object.isRequired,
+  listingType: PropTypes.object.isRequired
 };
 
 MovieDetail.defaultProps = {
@@ -122,7 +144,9 @@ MovieDetail.defaultProps = {
 const mapStateToProps = state => {
   return {
     movie: state.movieDetail.movie,
-    fetching: state.movieDetail.fetching
+    fetching: state.movieDetail.fetching,
+    locationId: state.locations.locationId,
+    listingType: state.listTypeReducer.listingType
   };
 };
 
