@@ -41,7 +41,7 @@ class Tabs extends React.Component {
           }
         </ul>
 
-        <div style={{ flexBasis: "150px" }}>
+        <div style={{ flexBasis: '150px' }}>
           <Location />
         </div>
       </div>
