@@ -7,4 +7,12 @@ export const defaultState = {
   items: [],
   locationId: 1
 };
-export const tabTypes = ["now-showing", "upcoming"];
+export const tabTypes = [{
+  label: "Now Showing",
+  key: "now_showing",
+  isActive: true
+}, {
+  label: "Upcoming",
+  key: "upcoming",
+  isActive: false
+}];

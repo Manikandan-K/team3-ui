@@ -1,51 +1,44 @@
 import React from "react";
 import Location from "../locations/Location";
-import { Link } from "react-router-dom";
 import { tabTypes } from "../constants";
 import { connect } from "react-redux";
-
-const Tab = ({ url, onToggle, children, isActive }) => {
-  return (
-    <li className="nav-item" onClick={onToggle}>
-      <Link className={`nav-link ${isActive ? "active" : ""}`} to={url}>
-        {children}
-      </Link>
-    </li>
-  );
-};
+import TabItem from "./tab-item"
+import {setListingType} from "./actions"
 
 class Tabs extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      isNowShowing: true
+      activeTabIndex: 0
     };
   }
 
-  toggleNowShowing = (e, url) => {
-    e.preventDefault();
-    this.props.setListingType(url);
+  toggleMovieType = (tabIndex, listingTab) => {
+    this.setState({
+      activeTabIndex: tabIndex
+    })
+    this.props.setListingType(listingTab)
   };
 
   render() {
-    const { isNowShowing } = this.state;
     return (
       <div className="d-flex justify-content-between mb-2">
         <ul className="nav nav-tabs" style={{ flex: 1 }}>
-          <Tab
-            onToggle={e => this.toggleNowShowing(e, tabTypes[0])}
-            url={`/${tabTypes[0]}`}
-            isActive={isNowShowing}
-          >
-            Now Showing
-          </Tab>
-          <Tab
-            onToggle={e => this.toggleNowShowing(e, tabTypes[1])}
-            url={`/${tabTypes[1]}`}
-            isActive={!isNowShowing}
-          >
-            Upcoming
-          </Tab>
+          {
+            tabTypes.map((tabType, index) => {
+              let isActiveTab = false;
+              if(index === this.state.activeTabIndex){
+                isActiveTab = true
+              }
+              return <TabItem
+                key = {tabType.key}
+                onToggle= {this.toggleMovieType}
+                data = {tabType}
+                tabIndex = {index}
+                isActive = {isActiveTab}
+              />
+            })
+          }
         </ul>
 
         <div style={{ flexBasis: "150px" }}>
@@ -56,11 +49,6 @@ class Tabs extends React.Component {
   }
 }
 
-const setListingType = (data) => ({
-  type : 'LISTING_TYPE',
-  payload: data,
-});
-
 const mapStateToProps = state => {
   return {
     listingType: state.listTypeReducer.listingType
@@ -69,7 +57,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setListingType: (lt) => dispatch(setListingType(lt))
+    setListingType: (listingType) => dispatch(setListingType(listingType))
   };
 };
 
