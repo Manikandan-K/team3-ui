@@ -66,6 +66,11 @@ class MovieDetail extends React.Component {
   redirectToGrid() {
     return <Redirect to="/movies" />;
   }
+  
+  bookSeat = () => {
+    const { history, movie } = this.props;
+    history.push(`/movies/${movie.id}/shows`);
+  };
 
   showMovie() {
     const {
@@ -107,7 +112,7 @@ class MovieDetail extends React.Component {
         />
         <div className="d-flex align-items-center justify-content-between mt-3">
           <h4 className="movie-subheading">synopsis</h4>
-          <button className="btn-book">Book seat</button>
+          <button className="btn-book" onClick={this.bookSeat}>Book seat</button>
         </div>
         <p className="item-content">{synopsis}</p>
         <Item title="Genre: " content={genre} />
