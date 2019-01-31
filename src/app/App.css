@@ -33,11 +33,10 @@
     }
 }
 
-.footer {
+.Footer {
     display: flex;
     justify-content: center;
     border-top: 1px solid lightgray;
-    padding: 10px;
 }
 
 footer a:nth-child(2) {

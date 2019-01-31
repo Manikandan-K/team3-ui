@@ -1,17 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import fetchMovieShows from './actions';
+import { fetchMovieShowsByDate, updateMovieShowDate } from './actions';
 import DropDown from '../drop-down/DropDown';
+import DateItem from './DateItem';
 import './MovieShows.css';
-
-const DateItem = ({ date }) => {
-  return (
-    <div className="date-item">
-      <div>{date.toString().split(' ')[0]}</div>
-      <div>{date.getDate()}</div>
-    </div>
-  );
-};
 
 const DatesWrapper = ({ dates }) => {
   return (
@@ -26,7 +18,14 @@ const DatesWrapper = ({ dates }) => {
 class MovieShows extends React.Component {
   componentDidMount() {
     const { id } = this.props.match.params;
-    this.props.fetchMovieShows(id);
+    this.props.fetchMovieShowsByDate(id, this.props.movieShowDate);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.movieShowDate !== prevProps.movieShowDate) {
+      const { id } = this.props.match.params;
+      this.props.fetchMovieShowsByDate(id, this.props.movieShowDate);
+    }
   }
 
   showLoading() {
@@ -76,10 +75,10 @@ class MovieShows extends React.Component {
           }
         )
       ) : (
-        <tr>
-          <td colSpan="5">loading</td>
-        </tr>
-      );
+          <tr>
+            <td colSpan="5" className="text-center">No shows for the selected date.</td>
+          </tr>
+        );
     const ticketRange = Array.from(
       new Array(10),
       (val, index) => index + 1
@@ -126,13 +125,14 @@ class MovieShows extends React.Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    movieShows: state.movieShows
+    movieShows: state.movieShows,
+    movieShowDate: state.movieShows.movieShowDate
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchMovieShows: name => dispatch(fetchMovieShows(name))
+    fetchMovieShowsByDate: (id, date) => dispatch(fetchMovieShowsByDate(id, date))
   };
 };
 
