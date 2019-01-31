@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import MovieDetail from "../movie-detail/MovieDetail";
 import MovieGrid from "../movies/MovieGrid";
-import Tabs from "./Tabs";
+import Tabs from "./../tabs/Tabs";
 
 class Routes extends React.Component {
   render() {

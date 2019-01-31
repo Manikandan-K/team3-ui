@@ -1,6 +1,8 @@
 import React from "react";
 import Location from "../locations/Location";
 import { Link } from "react-router-dom";
+import { tabTypes } from "../constants";
+import { connect } from "react-redux";
 
 const Tab = ({ url, onToggle, children, isActive }) => {
   return (
@@ -20,9 +22,9 @@ class Tabs extends React.Component {
     };
   }
 
-  toggleNowShowing = e => {
+  toggleNowShowing = (e, url) => {
     e.preventDefault();
-    this.setState({ isNowShowing: !this.state.isNowShowing });
+    this.props.setListingType(url);
   };
 
   render() {
@@ -31,15 +33,15 @@ class Tabs extends React.Component {
       <div className="d-flex justify-content-between mb-2">
         <ul className="nav nav-tabs" style={{ flex: 1 }}>
           <Tab
-            onToggle={this.toggleNowShowing}
-            url="/movies"
+            onToggle={e => this.toggleNowShowing(e, tabTypes[0])}
+            url={`/${tabTypes[0]}`}
             isActive={isNowShowing}
           >
             Now Showing
           </Tab>
           <Tab
-            onToggle={this.toggleNowShowing}
-            url="/movies"
+            onToggle={e => this.toggleNowShowing(e, tabTypes[1])}
+            url={`/${tabTypes[1]}`}
             isActive={!isNowShowing}
           >
             Upcoming
@@ -54,4 +56,24 @@ class Tabs extends React.Component {
   }
 }
 
-export default Tabs;
+const setListingType = (data) => ({
+  type : 'LISTING_TYPE',
+  payload: data,
+});
+
+const mapStateToProps = state => {
+  return {
+    listingType: state.listTypeReducer.listingType
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setListingType: (lt) => dispatch(setListingType(lt))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tabs);
