@@ -1,0 +1,34 @@
+.right-arrow-after {
+  position: relative;
+  margin-right: 1rem;
+}
+
+.right-arrow-after::after {
+  content: '>';
+  font-size: 0.7rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.2rem;
+}
+
+.date-item.active {
+  background: #3fa7e4;
+  color: white;
+}
+
+.date-item {
+  padding: 0.5rem 0.75rem;
+  margin-right: 0.5rem;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.showtime.available {
+  background: green;
+  color: white;
+}
+.showtime {
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+}
