@@ -12,13 +12,16 @@ class Location extends React.Component {
     this.state = {shouldShowPopup: false};
   }
 
-  componentDidMount() {
+
+
+  componentWillMount() {
     this.props.fetchLocations();
     let defaultLocation = window.localStorage.getItem("selectedLocationId");
     if (defaultLocation == null) {
       this.setState({shouldShowPopup : true});
       defaultLocation = 1;
     }
+    
     this.props.updateLocation(defaultLocation);
   }
 
@@ -42,7 +45,11 @@ class Location extends React.Component {
     );
   }
 
-  onChange = event => this.props.updateLocation(event.target.value);
+  onChange = event => {
+    this.props.updateLocation(event.target.value);
+    window.localStorage.setItem("selectedLocationId",event.target.value);
+
+  }
 
   showProgress() {
     return <div>Loading...</div>;

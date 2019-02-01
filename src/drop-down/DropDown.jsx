@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './DropDown.css';
+import { connect } from "react-redux";
 
 class DropDown extends React.Component {
+  
   render() {
+    
     let options = this.props.listItems.map((item, index) => {
       return (
         <option
           key={index}
           value={item.value}
-          selected={item === this.props.selectedItem}>
+          selected={item.value === this.props.locationId}>
           {item.key}
         </option>
       );
@@ -32,4 +35,12 @@ DropDown.propTypes = {
   onChange: PropTypes.func.isRequired
 };
 
-export default DropDown;
+const mapStateToProps = state => {
+  return {
+    locationId: state.locations.locationId
+  };
+};
+
+export default connect(
+  mapStateToProps
+)(DropDown);
