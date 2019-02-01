@@ -20,22 +20,18 @@ const movieDataFetchFailure = {
   type: FETCH_MOVIES_FAILURE,
 };
 
-const fetchMovies = (type,locationId) => {
+const fetchMovies = (type, locationId) => {
   return async (dispatch) => {
     dispatch(fetchMoviesInProgress);
     try {
-      const movies = await axios.get(`${baseUrl()}/movies?type=${type}&location=${locationId}`);
-      // const movies = {data: [{
-      //   id: 'asfasdfas',
-      //   name: 'Kabali',
-      //   experience: 'asfasdfag',
-      // }]}
+      const movies = await axios.get(`${baseUrl()}/movies?type=${type.toUpperCase()}&location=${locationId}`);
       const moviesData = movies.data.map(movie => {
         const sluggedData = slug(changeCase.sentenceCase(movie.name), { lower: true });
         return {...movie, slug: sluggedData}
       });  
       dispatch(movieDataFetched(moviesData))
     } catch(error) {
+      console.log(error)
       dispatch(movieDataFetchFailure)
     }
   }
