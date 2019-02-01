@@ -3,10 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchLocations, updateLocation } from "./action";
 import DropDown from "../drop-down/DropDown";
+import LocationPopupModal from "../location-popup-modal/LocationPopupModal";
 
 class Location extends React.Component {
   componentDidMount() {
     this.props.fetchLocations();
+
   }
 
   render() {
@@ -17,7 +19,18 @@ class Location extends React.Component {
     let locations = this.props.locations.items.map(location => {
       return { key: location.name, value: location.id };
     });
-    return <DropDown listItems={locations} onChange={this.onChange} />;
+    let popup = <div />;
+    let selectedLocation = 1;
+    // localStorage.getItem("selectedLocationId");
+    if(selectedLocation == null){
+      popup = <LocationPopupModal locations={locations} />;
+    } 
+    return (
+      <div>
+        <DropDown listItems={locations} onChange={this.onChange} />
+        {popup}
+      </div>
+    );
   }
 
   onChange = event => this.props.updateLocation(event.target.value);
