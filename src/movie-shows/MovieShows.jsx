@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchMovieShowsByDate, updateMovieShowDate } from './actions';
+import { fetchMovieShowsByDate } from './actions';
 import DropDown from '../drop-down/DropDown';
 import DateItem from './DateItem';
 import './MovieShows.css';
@@ -49,7 +49,8 @@ class MovieShows extends React.Component {
               runtime,
               capacity,
               startTime,
-              experience
+              experience,
+              language
             },
             index
           ) => {
@@ -58,7 +59,7 @@ class MovieShows extends React.Component {
                 <td>
                   {movieName}
                   <br />
-                  {runtime} minutes
+                  {language}     {runtime} minutes
                 </td>
                 <td>
                   <span className="movie-certificate">A</span>
