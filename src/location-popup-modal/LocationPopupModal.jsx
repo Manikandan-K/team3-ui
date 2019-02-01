@@ -23,7 +23,7 @@ class LocationPopupModal extends Component {
 
     onCityClicked = locationID => {
         this.props.updateLocation(locationID);
-        // localStorage.setItem("selectedLocationId",locationID);
+        window.localStorage.setItem("selectedLocationId",locationID);
         this.setState({ isOpen: false });
     }
 

@@ -6,9 +6,20 @@ import DropDown from "../drop-down/DropDown";
 import LocationPopupModal from "../location-popup-modal/LocationPopupModal";
 
 class Location extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {shouldShowPopup: false};
+  }
+
   componentDidMount() {
     this.props.fetchLocations();
-
+    let defaultLocation = window.localStorage.getItem("selectedLocationId");
+    if (defaultLocation == null) {
+      this.setState({shouldShowPopup : true});
+      defaultLocation = 1;
+    }
+    this.props.updateLocation(defaultLocation);
   }
 
   render() {
@@ -19,12 +30,10 @@ class Location extends React.Component {
     let locations = this.props.locations.items.map(location => {
       return { key: location.name, value: location.id };
     });
-    let popup = <div />;
-    let selectedLocation = 1;
-    // localStorage.getItem("selectedLocationId");
-    if(selectedLocation == null){
+    let popup = <div />;  
+    if (this.state.shouldShowPopup) {
       popup = <LocationPopupModal locations={locations} />;
-    } 
+    }
     return (
       <div>
         <DropDown listItems={locations} onChange={this.onChange} />
