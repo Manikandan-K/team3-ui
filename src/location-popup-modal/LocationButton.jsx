@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import './LocationPopupModal.css';
 
 class LocationButton extends Component {
-	constructor(props) {
-		super(props);
-	}
 	
 	onClickHandler = (e) =>{
 		e.preventDefault();
