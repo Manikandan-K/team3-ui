@@ -1,9 +1,9 @@
-import React from "react";
-import "./MovieDetail.css";
-import { Redirect } from "react-router";
-import { connect } from "react-redux";
-import fetchMovie from "./actions";
-import PropTypes from "prop-types";
+import React from 'react';
+import './MovieDetail.css';
+import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
+import fetchMovie from './actions';
+import PropTypes from 'prop-types';
 
 const movieUrl = (slug, size) => {
   return `https://img.spicinemas.in/resources/images/movies/${slug}/${size}.jpg`;
@@ -26,7 +26,7 @@ const FootingImages = ({ slug }) => {
   return (
     <img
       className="col-md-2"
-      src={movieUrl(slug, "150x207")}
+      src={movieUrl(slug, '150x207')}
       alt="movie footing images"
     />
   );
@@ -48,10 +48,10 @@ class MovieDetail extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (this.props.locationId !== prevProps.locationId) {
-      this.setState({redirect : true});
+      this.setState({ redirect: true });
     }
     if (this.props.listingType !== prevProps.listingType) {
-      this.setState({redirect : true});
+      this.setState({ redirect: true });
     }
   }
 
@@ -66,7 +66,7 @@ class MovieDetail extends React.Component {
   redirectToGrid() {
     return <Redirect to="/movies" />;
   }
-  
+
   bookSeat = () => {
     const { history, movie } = this.props;
     history.push(`/movies/${movie.id}/shows`);
@@ -82,6 +82,7 @@ class MovieDetail extends React.Component {
       movieCast,
       runtime,
       slug,
+      listingType,
       synopsis
     } = this.props.movie;
 
@@ -100,25 +101,29 @@ class MovieDetail extends React.Component {
           <button
             type="button"
             class="btn btn-outline-info mb-2"
-            onClick={this.props.history.goBack}
-          >
+            onClick={this.props.history.goBack}>
             Back
           </button>
         </div>
         <img
           className="movie-banner"
-          src={movieUrl(slug, "1000x320")}
-          alt={name + " movie banner"}
+          src={movieUrl(slug, '1000x320')}
+          alt={name + ' movie banner'}
         />
         <div className="d-flex align-items-center justify-content-between mt-3">
           <h4 className="movie-subheading">synopsis</h4>
-          <button className="btn-book" onClick={this.bookSeat}>Book seat</button>
+          <button
+            className="btn-book"
+            onClick={this.bookSeat}
+            disabled={listingType === 'UPCOMING'}>
+            {listingType === 'UPCOMING' ? 'Coming soon' : 'Book seat'}
+          </button>
         </div>
         <p className="item-content">{synopsis}</p>
         <Item title="Genre: " content={genre} />
         <Item title="Crew: " content={crew} />
         <Item title="Cast: " content={movieCast} />
-        <Item title="Runtime: " content={runtime + " Minutes"} />
+        <Item title="Runtime: " content={runtime + ' Minutes'} />
 
         <h4 className="movie-subheading">Images</h4>
         <div className="row">{images}</div>

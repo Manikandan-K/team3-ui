@@ -1,36 +1,42 @@
 .movie-detail-wrapper {
-    padding: .6rem 0;
+  padding: 0.6rem 0;
 }
 
 .movie-certificate {
-    margin: 0 1rem;
-    width: 35px;
-    height: 35px;
-    background: yellow;
-    border-radius: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid;
+  margin: 0 1rem;
+  width: 35px;
+  height: 35px;
+  background: yellow;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
 }
 
 .item-content {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .movie-banner {
-    width: 100%;
+  width: 100%;
 }
 
 .btn-book {
-    background: purple;
-    color: white;
-    padding: .3rem 1rem;
-    width: 150px;
-    text-transform: uppercase;
+  background: purple;
+  color: white;
+  padding: 0.3rem 1rem;
+  min-width: 150px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-book:disabled {
+  cursor: not-allowed;
+  background-color: #cccccc;
 }
 
 .movie-subheading {
-    color: #415bab;
-    text-transform: uppercase;
+  color: #415bab;
+  text-transform: uppercase;
 }
